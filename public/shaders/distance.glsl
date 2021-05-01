@@ -196,7 +196,6 @@ bool line_intersect (float x1, float y1, float x2, float y2, float x3, float y3,
 
 
 vec2 nearest_point_on_line(float ax, float ay, float bx, float by, float cx, float cy) {
-
   float ab = earth_distance(ax, ay, bx, by);
   float ac = earth_distance(ax, ay, cx, cy);
 
