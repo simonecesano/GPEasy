@@ -1,7 +1,5 @@
-class GPEasy {
+export default class GPEasy {
     constructor(width, height) {
-	console.log('here');
-
 	width  = width || 1;
 	height = height || 1;
 	
@@ -152,7 +150,7 @@ class GPEasy {
 	gl.activeTexture(gl.TEXTURE0 + position);
 	gl.bindTexture(gl.TEXTURE_2D, tex);
 	
-	gl.pixelStorei(gl.UNPACK_ALIGNMENT, 4); // see https://webglfundamentals.org/webgl/lessons/webgl-data-textures.html
+	gl.pixelStorei(gl.UNPACK_ALIGNMENT, opts.alignment || 4); // see https://webglfundamentals.org/webgl/lessons/webgl-data-textures.html
 	
 	gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA,
 		       width, height,
@@ -168,11 +166,11 @@ class GPEasy {
 
 	this.textures.push({ name: name, location: loc, texture: tex })
 	
-	var sizeLoc = gl.getUniformLocation(program, name + 'Size')
+	var sizeLoc = gl.getUniformLocation(program, name + '_size')
 	if (sizeLoc){
-	    this.createUniform(name + 'Size', width, height)
+	    this.createUniform(name + '_size', width, height)
 	} else {
-	    console.warn(`Variable ${name + 'Size'} does not exist - skipping creation of size uniform`);
+	    console.warn(`Variable ${name + '_size'} does not exist - skipping creation of size uniform`);
 	}
 	
     }
@@ -277,3 +275,4 @@ function depth(value) {
 function step(value){
     return Math.pow(2, depth(value)-1)
 }
+
