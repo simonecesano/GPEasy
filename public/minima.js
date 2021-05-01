@@ -46,7 +46,7 @@ $(function(){
 	console.timeEnd('distances calc')
 
 	var fields = ['distance', 'lng', 'lat', 'leg', 'pos', 'bearing'];
-	console.log(distances.map(
+	distances = distances.map(
 	    (d, i) => {
 		var h = {}
 		fields.forEach((f, i) => h[f] = d[i])
@@ -55,6 +55,10 @@ $(function(){
 	    }
 	).sort((a, b) => {
 	    return a.leg - b.leg || a.pos - b.pos || a.distance - b.distance;
-	}));
+	});
+	axios.post('distances', distances)
+	    .then(d => console.log(d.data))
+	    .catch(e => console.log(e))
+	
     }).catch(e => console.log(e))
 })
